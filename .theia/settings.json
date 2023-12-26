@@ -1,0 +1,6 @@
+{
+    "html.format.unformatted": "meta,link",
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}
