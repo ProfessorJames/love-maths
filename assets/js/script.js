@@ -2,6 +2,7 @@
 // Get the button elements and add event listeners
 
 document.addEventListener('DOMContentLoaded', function (){
+
     let buttons = document.getElementsByTagName('button');
 
     for(let button of buttons){
@@ -17,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function (){
 
     runGame('addition');
 
-    
 })
 
 
@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function (){
  * and after the user's answer has been processed 
  */
 function runGame (gameType) {
+
     // Create two random numbers between 1 and 25
     let num1 = Math.floor(Math.random() * 25) + 1;
     let num2 = Math.floor(Math.random() * 25) + 1;
@@ -37,7 +38,7 @@ function runGame (gameType) {
         displaySubtractionQuestion(num1, num2);
     } 
     else if(gameType === 'multiply'){
-        displayMultiplyQuestion(num1, num2);
+        displayMultiplicationQuestion(num1, num2);
     } 
     else {
         alert(`Unknown game type: ${gameType}`);
@@ -45,13 +46,12 @@ function runGame (gameType) {
     }
 }
 
-// runGame();
-
 /**
  * Checks the answer against the first element in 
  * the returned calculateCorrectScore array
  */
 function checkAnswer(){
+
    let userAnswer = parseInt(document.getElementById('answer-box').value);
    let calculatedAnswer = calculateCorrectAnswer();
    let isCorrect = userAnswer === calculatedAnswer[0];
@@ -76,6 +76,7 @@ function checkAnswer(){
  */
 
 function calculateCorrectAnswer(){
+
     let operand1 = parseInt(document.getElementById('operand1').innerHTML);
     let operand2 = parseInt(document.getElementById('operand2').innerHTML);
     let operator = document.getElementById('operator').innerHTML;
@@ -106,11 +107,13 @@ function incrementScore(){
  * Gets the current tally of incorrect answers rom the DOM and increments it by 1
  */
 function incrementWrongAnswer(){
+
     let oldScore = parseInt(document.getElementById('incorrect').innerText);
     document.getElementById("incorrect").innerText = ++oldScore
 }
 
 function displayAdditionQuestion(operand1, operand2){
+
     document.getElementById('operand1').textContent = operand1;
     document.getElementById('operand2').textContent = operand2;
     document.getElementById('operator').textContent = "+";
@@ -118,12 +121,16 @@ function displayAdditionQuestion(operand1, operand2){
 }
 
 function displaySubtractionQuestion(operand1, operand2){
-    document.getElementById('operand1').textContent = operand1;
-    document.getElementById('operand2').textContent = operand2;
+
+    document.getElementById('operand1').textContent = operand1 > operand2 ? operand1 : operand2;
+    document.getElementById('operand2').textContent = operand1 > operand2 ? operand2 : operand1;
+    
+   
     document.getElementById('operator').textContent = "-";
 }
 
-function displayMultiplyQuestion(operand1, operand2){
+function displayMultiplicationQuestion(operand1, operand2){
+
     document.getElementById('operand1').textContent = operand1;
     document.getElementById('operand2').textContent = operand2;
     document.getElementById('operator').textContent = "x";
